@@ -1,0 +1,29 @@
+# Laravel関連
+/vendor/                 # Composer依存関係
+/storage/                # ストレージディレクトリ（シンボリックリンクなど）
+.phpunit.result.cache    # PHPUnitのキャッシュファイル
+
+# 環境変数ファイル
+.env
+.env.*
+
+# Git関連
+.git/
+.gitignore
+
+# OS関連
+.DS_Store
+Thumbs.db
+
+# Docker関連
+docker-compose.override.yml
+*.log
+*.pid
+
+# フロントエンド関連（Viteなど）
+node_modules/            # Node.js依存関係
+dist/                    # Viteのビルド成果物
+
+# IDE関連
+.vscode/                 # VS Code設定
+.idea/                   # JetBrains系IDE設定

@@ -1,0 +1,30 @@
+# Node.js関連
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Laravel関連
+/vendor/
+.env
+/storage/
+.phpunit.result.cache
+
+# Docker関連
+docker-compose.override.yml
+*.log
+*.pid
+
+# OS/IDE関連
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Vite関連（frontend）
+dist/                    # ビルド成果物
+.cache/                  # 一部ツールのキャッシュ
+.hot                     # HMRファイル
+
+# その他
+*.env.*                  # .env.production なども無視
