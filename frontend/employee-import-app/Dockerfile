@@ -7,7 +7,7 @@ WORKDIR /app
 
 # 依存ファイルを先にコピーしてinstall（キャッシュ効かせる）
 COPY package*.json ./
-RUN npm ci
+RUN npm install
 
 # アプリ本体をコピー
 COPY . .

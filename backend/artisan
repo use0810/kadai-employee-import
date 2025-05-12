@@ -2,17 +2,18 @@
 <?php
 
 use Illuminate\Foundation\Application;
-use Symfony\Component\Console\Input\ArgvInput;
 
-define('LARAVEL_START', microtime(true));
+require_once __DIR__.'/vendor/autoload.php';
 
-// Register the Composer autoloader...
-require __DIR__.'/vendor/autoload.php';
-
-// Bootstrap Laravel and handle the command...
-/** @var Application $app */
-$app = require_once __DIR__.'/bootstrap/app.php';
-
-$status = $app->handleCommand(new ArgvInput);
-
-exit($status);
+Application::configure(basePath: __DIR__)
+    ->withRouting(
+        web: __DIR__.'/routes/web.php',
+        api: __DIR__.'/routes/api.php',
+    )
+    ->withMiddleware(function () {
+        // middleware 定義（任意）
+    })
+    ->withExceptions(function () {
+        // 例外ハンドラ定義（任意）
+    })
+    ->create(); 

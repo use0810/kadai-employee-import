@@ -42,15 +42,15 @@ const uploadFile = async (file: File) => {
   error.value = null
 
   try {
-   const response = await axios.post(
-     `${import.meta.env.VITE_API_BASE_URL}/api/import-employees`,
-     formData,
-     {
-       headers: {
-         'Content-Type': 'multipart/form-data',
-       },
-     }
-   )
+    const response = await axios.post(
+      'http://localhost:8000/api/import-employees', // Laravelのデフォルトポート
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
 
     console.log('アップロード成功:', response.data)
     success.value = '✅ アップロードが完了しました！'

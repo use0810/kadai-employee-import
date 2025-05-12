@@ -10,6 +10,10 @@ RUN apt-get update && apt-get install -y \
 # Composerインストール
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# wait-for-it.sh をコピー
+COPY wait-for-it.sh /usr/local/bin/wait-for-it.sh
+RUN chmod +x /usr/local/bin/wait-for-it.sh
+
 # 作業ディレクトリ指定
 WORKDIR /var/www
 
@@ -17,3 +21,8 @@ WORKDIR /var/www
 COPY . /var/www
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www/storage /var/www/bootstrap
+
+
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]

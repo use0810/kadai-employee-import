@@ -7,6 +7,7 @@ services:
       - "8000:8000"
     volumes:
       - ./backend:/var/www
+      - /var/www/vendor
     depends_on:
       - db
     environment:
@@ -25,6 +26,7 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend/employee-import-app:/app
+      - /app/node_modules
     command: npm run dev -- --host
     depends_on:
       - backend

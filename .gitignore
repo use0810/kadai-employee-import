@@ -6,7 +6,7 @@ yarn-error.log*
 
 # Laravel関連
 /vendor/
-.env
+#.env
 /storage/
 .phpunit.result.cache
 
@@ -27,4 +27,4 @@ dist/                    # ビルド成果物
 .hot                     # HMRファイル
 
 # その他
-*.env.*                  # .env.production なども無視
+#*.env.*                  # .env.production なども無視
