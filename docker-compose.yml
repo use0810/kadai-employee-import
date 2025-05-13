@@ -23,7 +23,7 @@ services:
       context: ./frontend/employee-import-app
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "5173:5173"
     volumes:
       - ./frontend/employee-import-app:/app
       - /app/node_modules

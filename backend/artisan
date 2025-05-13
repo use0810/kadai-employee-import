@@ -1,19 +1,17 @@
-#!/usr/bin/env php
 <?php
+#!/usr/bin/env php
 
-use Illuminate\Foundation\Application;
+require __DIR__.'/vendor/autoload.php';
 
-require_once __DIR__.'/vendor/autoload.php';
+$app = require_once __DIR__.'/bootstrap/app.php';
 
-Application::configure(basePath: __DIR__)
-    ->withRouting(
-        web: __DIR__.'/routes/web.php',
-        api: __DIR__.'/routes/api.php',
-    )
-    ->withMiddleware(function () {
-        // middleware 定義（任意）
-    })
-    ->withExceptions(function () {
-        // 例外ハンドラ定義（任意）
-    })
-    ->create(); 
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+
+$status = $kernel->handle(
+    $input = new Symfony\Component\Console\Input\ArgvInput,
+    new Symfony\Component\Console\Output\ConsoleOutput
+);
+
+$kernel->terminate($input, $status);
+
+exit($status);

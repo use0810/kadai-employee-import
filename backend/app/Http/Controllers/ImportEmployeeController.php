@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use Illuminate\Support\Facades\Log;
 
 class ImportEmployeeController extends Controller
 {
     public function import(Request $request)
-    {
-        // バリデーション（CSVファイルのみ受け付け）
+{
+    try {
         $request->validate([
             'file' => 'required|file|mimes:csv,txt',
         ]);
@@ -17,13 +18,17 @@ class ImportEmployeeController extends Controller
         $file = $request->file('file');
         $path = $file->getRealPath();
 
-        // CSVを開いて読み込み
         if (($handle = fopen($path, 'r')) !== false) {
-            // ヘッダー行を読み飛ばす（例: name,position）
             $header = fgetcsv($handle);
 
+            $expectedHeader = ['name', 'position'];
+            if ($header !== $expectedHeader) {
+                return response()->json(['error' => 'CSVヘッダーが正しくありません'], 400);
+            }
+
             while (($data = fgetcsv($handle)) !== false) {
-                // カラム順に合わせて登録
+                Log::info('CSV行データ:', $data); 
+
                 Employee::create([
                     'name'     => $data[0] ?? '',
                     'position' => $data[1] ?? '',
@@ -34,5 +39,13 @@ class ImportEmployeeController extends Controller
         }
 
         return response()->json(['message' => 'CSV imported successfully']);
+    } catch (\Throwable $e) {
+        Log::error('CSVインポート中にエラー:', [
+            'message' => $e->getMessage(),
+            'trace' => $e->getTraceAsString(),
+        ]);
+
+        return response()->json(['error' => 'サーバー内部エラー'], 500);
     }
+}
 }

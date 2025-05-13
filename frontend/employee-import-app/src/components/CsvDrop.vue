@@ -43,20 +43,21 @@ const uploadFile = async (file: File) => {
 
   try {
     const response = await axios.post(
-      'http://localhost:8000/api/import-employees', // Laravelのデフォルトポート
+      `${import.meta.env.VITE_API_BASE_URL}/api/import-employees`,
       formData,
       {
         headers: {
           'Content-Type': 'multipart/form-data',
+          'Accept': 'application/json',
         },
       }
     )
 
     console.log('アップロード成功:', response.data)
-    success.value = '✅ アップロードが完了しました！'
+    success.value = 'アップロードが完了しました！'
   } catch (err) {
     console.error('アップロード失敗:', err)
-    error.value = '❌ アップロードに失敗しました。'
+    error.value = 'アップロードに失敗しました。'
   } finally {
     uploading.value = false
     setTimeout(() => {
