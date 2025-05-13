@@ -5,7 +5,7 @@
       class="drop-zone"
       @click="fileInput.click()"
     >
-      <p class="drop-message">📁 CSVファイルをドラッグ＆ドロップ<br>またはクリックして選択</p>
+      <p class="drop-message"> CSVファイルをドラッグ＆ドロップ<br>またはクリックして選択</p>
       <p v-if="file">選択中: {{ file.name }}</p>
       <p v-if="uploading" class="text-blue">アップロード中...</p>
       <p v-if="success" class="text-green">{{ success }}</p>

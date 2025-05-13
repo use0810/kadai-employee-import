@@ -8,6 +8,7 @@ if [ ! -f vendor/autoload.php ]; then
   composer install --no-interaction --prefer-dist --optimize-autoloader
 fi
 
+# 本番ではphp artisan serveではなくこちらで起動
 # exec php-fpm
 
 # Laravelサーバーを起動（外部アクセスできるように）
